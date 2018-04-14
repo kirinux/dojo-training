@@ -1,10 +1,10 @@
-package com.gildedrose;
-
-import static org.junit.Assert.*;
+package org.craftedsw.katas.logging;
 
 import org.junit.Test;
 
-public class GildedRoseTest {
+import static org.junit.Assert.*;
+
+public class LoggingRoseTest {
 
 
     @Test
@@ -67,7 +67,7 @@ public class GildedRoseTest {
 
     private void run(Item item, int expectedQuality, int expectedSellin) {
         Item[] items = new Item[]{item};
-        GildedRose app = new GildedRose(items);
+        LoggingRose app = new LoggingRose(items);
         app.updateQuality();
         assertEquals("Expected quality value is false", expectedQuality, app.items[0].quality);
         assertEquals("Expected sellin value is false", expectedSellin, app.items[0].sellIn);
