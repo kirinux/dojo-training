@@ -26,7 +26,7 @@ Dans un second temps il s'agira de manipuler les données (design pattern DAO)
 **En tant que Seymour Krelborn** je serais votre product owner, vous pouvez me poser toutes les questions que vous voulez pour pouvoir répondre à mon besoin.
 
 ### Part 1 : Modélisation
-Nous disposons d'un **catalogue** de plantes, qui nous permet de chercher les plantes par leur nom ou par leur famille. Nous pouvons également ajouter ou supprimer des plantes du catalogue. De plus il est possible de trouver une plante dans le catalogue avec sa description complète (nom, prix...).
+Nous disposons d'un **catalogue** de plantes, qui nous permet de **chercher** les plantes par leur nom ou par leur famille. Nous pouvons également ajouter ou supprimer des plantes du catalogue. De plus il est possible de trouver une plante dans le catalogue avec sa description complète (nom, prix...).
 Le catalogue permet aussi de voir rapidement les plantes les moins chères (les best value inférieures à un prix donné)
 Dans la boutique nous vendons des **plantes** chacune d'elles à un nom, un prix, un nom long (le nom latin en général) et une famille (la famille à laquelle la plante appartient)
 
@@ -47,7 +47,7 @@ Durée: environ 2h
 ### Part 2 : Premier design pattern, DAO
 
 #### Step 1: DAO
-Notre première implémentation utilise une structure de données, le **catalogue**, dorénavant le stock de la boutique des horreurs provient d'un fichier qui contient toutes les plantes disponibles.
+Notre première implémentation utilise une structure de données, le **catalogue**, dorénavant le stock de la boutique des horreurs provient d'un **fichier** qui contient toutes les plantes disponibles.
 Le fichier est au format
 
 	#name/longName/family/price
@@ -62,6 +62,12 @@ afin d'avoir un couplage faible entre le catalog et la source des données
 En tant que Seymour
 je veux pouvoir changer facilement la source des données du catalogue
 afin de pouvoir diversifier la provenance des plantes mangeuses d'hommes
+
+#### astuces
+- Mettez vous dans le cas ou la source des données peut varier (entre le test et la production par exemple), donc provenir d'un fichier, d'une base de données, d'un mock...
+- Votre catalogue doit déléguer tout ce qui touche à la gestion des données, au DAO (Data Access Object)
+- Faite une couverture de test pour vos DAO, du coup, les tests de votre catalogue vont être déporté dans le DAO et les tests du catalogue devraient changer pour devenir un peu plus fonctionnels
+- Utilisez Mockito pour vos nouveaux tests de catalogue
 
 #### Step 2: DAO + DI
 Dans peu de temps, les données proviendront d'une base de données (et plus d'un fichier)
