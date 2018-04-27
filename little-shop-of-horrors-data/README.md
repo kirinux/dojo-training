@@ -148,7 +148,7 @@ Vous pouvez également tenter de faire des tests d'intégration, en lancant un v
 	- https://docs.spring.io/spring-boot/docs/current/reference/html/boot-features-testing.html
 		
 
-### Part 4 : The little shop of horrors
+### Part 4 : The little shop of horrors v1
 
 #### Step 1: Shop
 Il est temps de modéliser la boutique ! 
@@ -187,3 +187,43 @@ Quels objets doivent gérer le stock ? qui doit les incréments/décréments du 
 
 Réfléchissez au cas métier que cela implique, que se passe t'il si on essaie de vendre une plantea avec un stock = 0 par exemple
 Implémentez la nouvelle logique métier (dans les bons objets) et réaliser les tests nécessaires (en TDD si possible)
+
+
+### Part 5 : Décorons les plantes
+Considérons un objet Client (une classe Customer) qui contient une méthode *interact* (pour l'instant il ne s'agit que d'un placeholder pour la suite)
+
+	public class Customer {  
+	  
+	    public void interact(String action) {  
+	        System.out.println("Call action: " + action);  
+	  }  
+	}
+
+Améliorons notre modélisation des plantes, pour l'instant nous n'avons qu'une classe Plante (avec ses attributs)
+Les plantes ont des actions sur les être Humain, et sur les clients (c'est pour ça qu'il viennent en acheter d'ailleurs).
+Ajouter une méthode (comportementale) dans vos plante
+
+		public void interactWith(Customer customer) {  
+		    customer.interact("Make Happy");  
+		}
+Cette méthode applique un effet sur un client (par défaut, la classe plante, rend un client heureux)
+
+Seymour aimerait améliorer et diversifier les plantes du magasin, revoyez votre modélisation pour permettre d'avoir des plantes qui ont divers effets sur les clients:
+
+ - Des plantes carnivores (mord les clients)
+ - Des plantes illégales (détend les clients)
+ - Des plantes qui chantent (amuse les clients)
+(ps: chacune des plantes à sa propre implémentation de la méthode *interactWith*)
+
+Avec votre modélisation est-il possible d'avoir une nouvelle plante : **une plante extraterrestre** qui est à la fois une plante qui chante, une plante carnivore, une plante illégale et une plante mangeuse d'hommes (mange les clients) ? Sans avoir à recopier le comportement de la méthode *interactWith* depuis les autres classes.
+
+Pour arriver à cette composition facilement vous devriez regarder le **design pattern Decorator**
+L'idée générale est de pouvoir écrire:
+
+		PlanteExtraTerestre plant = new PlanteExtraTerestre(new PlanteCarnivore(new PlanteQuiChante())))
+
+
+		
+
+
+ 
